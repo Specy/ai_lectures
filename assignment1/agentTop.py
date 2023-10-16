@@ -2,7 +2,7 @@
 # AIFCA Python3 code Version 0.9.3 Documentation at http://aipython.org
 # Download the zip file and read aipython.pdf for documentation
 import math
-
+import random
 # Artificial Intelligence: Foundations of Computational Agents http://artint.info
 # Copyright David L Poole and Alan K Mackworth 2017-2021.
 # This work is licensed under a Creative Commons
@@ -16,8 +16,7 @@ from agentEnv import Rob_body, Rob_env
 
 
 class Rob_top_layer(Environment):
-    def __init__(self, middle, timeout=200, locations={'mail': (-5, 10),
-                                                       'o103': (50, 10), 'o109': (100, 10), 'storage': (101, 51)}):
+    def __init__(self, middle, timeout=200, locations={}):
         """middle is the middle layer
         timeout is the number of steps the middle layer goes before giving up
         locations is a loc:pos dictionary 
@@ -51,6 +50,7 @@ class Rob_top_layer(Environment):
                 self.display(1, "Crashed")
                 break
 
+
 class Location:
     def __init__(self, location, x, y):
         self.location = location
@@ -75,6 +75,7 @@ def find_closest(pos, locations):
         distance = math.dist([px, py], [location.x, location.y])
         if distance < closest_distance:
             closest = location
+            closest_distance = distance
     return closest
 
 
@@ -111,20 +112,44 @@ class Plot_env(object):
 """
 """
 
+
+def generate_random_wall(maxX, maxY, maxLength):
+    x0 = random.randint(0, maxX)
+    y0 = random.randint(0, maxY)
+    x1 = x0 + random.randint(0, maxLength)
+    y1 = y0 + random.randint(0, maxLength)
+    return (x0, y0), (x1, y1)
+
+
+def generate_random_point(maxX, maxY):
+    x0 = random.randint(0, maxX)
+    y0 = random.randint(0, maxY)
+    return x0, y0
+
+
 env = Rob_env({
     ((5, 0), (25, 25)),
     ((25, 25), (40, 20)),
-    ((40, 30), (60, 30)),
-    ((80, 5), (80, 40)),
+    generate_random_wall(200, 75, 40),
+    generate_random_wall(200, 75, 40),
+    generate_random_wall(200, 75, 40),
+
 })
+points = {
+    'mail': generate_random_point(200, 75),
+    'storage': generate_random_point(200, 75),
+    'o109': generate_random_point(200, 75),
+    'o103': generate_random_point(200, 75)
+}
+
 body = Rob_body(env)
 middle = Rob_middle_layer(body)
-top = Rob_top_layer(middle)
+top = Rob_top_layer(middle, 200, points)
 
 # try:
 pl = Plot_env(body, top)
 top.do({
-    'visit': ['o109', 'storage', 'o109', 'o103'],
+    'visit': points.keys()
 })
 pl.plot_run()
 # You can directly control the middle layer:
