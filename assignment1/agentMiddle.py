@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 from agents import Environment
 import math
 
-
 class Rob_middle_layer(Environment):
     def __init__(self, env):
         self.env = env
