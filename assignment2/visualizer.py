@@ -14,18 +14,23 @@ if __name__ == '__main__':
   start_position = (0, 0)
   end_position = (6,4)
 
+
   # Seleziona l'algoritmo da visualizzare
-  # path = a_star.a_star_search(G, start_position, end_position)
-  path = best_first_search.best_first_search(G, start_position, end_position)
+  path = a_star.a_star_search(G, start_position, end_position)
+  #path = best_first_search.best_first_search(G, start_position, end_position)
 
   pos = {(x, y): (y, -x) for x, y in G.nodes()}
   nx.draw_networkx_nodes(G, pos=pos, node_size=600, node_color=['black' if node in black_positions else 'white' for node in G.nodes()], edgecolors='black')
   nx.draw_networkx_edges(G, pos=pos)
 
   point, = plt.plot([], [], marker='o', color='green', markersize=15)
-
+  #set color of end point
+  nx.draw_networkx_nodes(G, pos=pos, nodelist=[end_position], node_size=600, node_color='red', edgecolors='black')
   def update(frame):
+      if frame > 0: # print trail
+        nx.draw_networkx_nodes(G, pos=pos, nodelist=[path[frame - 1]], node_size=600, node_color='yellow', edgecolors='black')
       x, y = pos[path[frame]]
+      #set color of visited nodes
       point.set_data(x, y)
       return point,
 
