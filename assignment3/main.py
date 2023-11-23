@@ -64,6 +64,8 @@ for v in csp.variables:
     print(f'{v.name} -> {v.domain}')
     domain_dic.update({v: v.domain})
 
+csp.show(showDomains=True)
+
 # Domain pruning
 print("\n")
 for c in csp.constraints:
@@ -74,5 +76,5 @@ for a in Con_solver(csp).generate_sols():
     print(a)
     pass
 
-csp.show()
+csp.show(showDomains=True)
 

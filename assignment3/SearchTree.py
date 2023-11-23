@@ -57,22 +57,3 @@ def pad_of_length(s, length):
     if length <= 0:
         return ""
     return s * length
-
-
-def branch(depth):
-    if (depth <= 0):
-        return "   "
-    return "|__" + "___" * (depth - 1)
-
-
-def assignment_to_string(assignment):
-    items = sorted(assignment.items(), key=lambda x: x[0].name)
-    return " ".join(f"{var}={value}" for var, value in items)
-
-
-def last_n_assignments_to_string(assignments, n):
-    # prints the last n assignments (inclusive)
-    items = sorted(assignments.items(), key=lambda x: x[0].name)
-    if len(items) <= n:
-        return " ".join(f"{var}={value}" for var, value in items)
-    return " ".join(f"{var}={value}" for var, value in items[-n:])
