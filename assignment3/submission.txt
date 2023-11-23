@@ -3,7 +3,9 @@ Soluzione dell'esercizio 2
 1) è stata creata una classe SearchTree che implementa l'albero di soluzione del CSP con
 backtracking, stampa ogni step della ricerca della soluzione e poi ritorna tutte le soluzioni ammissibili
 2)
-    2.1) è stato mostrato il grafo di soluzione del problema, verrà mostrato a fine esecuzione
+    2.1) è stato mostrato il grafo di soluzione del problema, verrà mostrato anche a fine esecuzione
     2.2) viene stampato il dominio ridotto e quale arco lo ha causato
     2.3) viene stampato (e mostrato in plot) il grafo dopo aver applicato l'arc consistency
-    2.4)
+    2.4) il domain splitting permette di più efficacemente trovare la soluzione, in quanto si divide il dominio di 
+    una variabile in due parti, per poi cercare una soluzione in entrambi, questo diminuisce il numero di nodi analizzati, 
+    pur trovando tutte le soluzioni ammissibili, dato che verranno riunti i due domini
