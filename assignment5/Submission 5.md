@@ -49,13 +49,14 @@ sweep_lr:
 Causal rules:
 - The room is not dusty after being dusted:  $Lr\_dusty=false \leftarrow Act=dust \wedge Rob\_loc = lr$ 
 - The room becomes dusty if it is swept: $Lr\_dusty=true \leftarrow Act=sweep \wedge Rob\_loc = lr$ 
+
 Frame rules: (???)
 - If the robot is in another room: $Lr\_dusty \leftarrow Lr\_dusty \wedge Rob\_loc \ne lr$ 
 
 ---
 (3) Suppose that the initial state is that the robot is in the garage, both rooms are dusty but have clean floors and the goal is to have both rooms not dusty. Draw the first two levels (with two actions, so the root has children and grandchildren) of a forward planner with multiple-path pruning, showing the actions (but you do not have to show the states). Show explicitly what nodes are pruned through multiple-path pruning
 
-![[a1.drawio (2).svg]]
+![[a1.svg]]
 In red are shown the paths that are pruned, as they lead to an already visited state, this means that paths from that path can be ignored (as shown for C2), the next paths to visit will be G3 and G4
 
 ---
@@ -78,7 +79,7 @@ Gar_dusty is true, the next step would be to dust the garage
 ---
 (5) Suppose that the initial state is that the robot is in the garage, both rooms are dusty but have clean floors and the goal is to have both rooms not dusty. Draw the first two levels (with two actions, so the root has children and grandchildren) of a regression planner showing the actions but you do not have to show what the nodes represent
 
-![[a2.drawio (3).svg]]
+![[a2.svg]]
 Going from the goal, the last two actions will be sweeping either the living room or garage, the grandchild actions would be the opposite actions of moving from the living room to garage, and the opposite
 
 ---
@@ -108,4 +109,4 @@ Action features:
 
 Inconsistent constraints:
 	TODO
-![[a3.drawio (1).svg]]
+![[a3.svg]]
